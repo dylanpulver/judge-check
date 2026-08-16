@@ -1,5 +1,7 @@
 # judge-check
 
+[![CI](https://github.com/dylanpulver/judge-check/actions/workflows/ci.yml/badge.svg)](https://github.com/dylanpulver/judge-check/actions/workflows/ci.yml)
+
 **Is your LLM judge actually discriminating, or just nodding?**
 
 Decoys are the unit tests of judges. If you use an LLM to grade outputs — pass/fail

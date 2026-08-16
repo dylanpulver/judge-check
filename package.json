@@ -1,0 +1,25 @@
+{
+  "name": "judge-check",
+  "version": "1.0.0",
+  "description": "LLM judge calibration kit — is your judge actually discriminating, or just nodding?",
+  "type": "module",
+  "bin": {
+    "judge-check": "bin/judge-check.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "example": "node bin/judge-check.js --judge examples/changelog-judge.md --real examples/real.jsonl --decoys examples/decoys.jsonl --gold examples/gold.jsonl --garbage 3 --dry-run examples/recorded.json"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "llm",
+    "evals",
+    "llm-as-judge",
+    "calibration",
+    "decoys"
+  ],
+  "author": "Dylan Pulver",
+  "license": "MIT"
+}

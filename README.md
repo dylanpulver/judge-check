@@ -145,3 +145,7 @@ gold fails → *over-strict*; >25% of candidates flip → *inconsistent*; otherw
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+Built by [Dylan Pulver](https://dylanpulver.com), software engineer and entrepreneur in Toronto.

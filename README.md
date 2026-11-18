@@ -50,7 +50,9 @@ node bin/judge-check.js \
 
 The shipped example is a small judge ("does this changelog entry state a concrete,
 user-visible change?") run over 8 real entries, 3 garbage decoys, 4 subtle decoys,
-and 2 gold entries, replaying recorded responses. That prints the report at the top of this page.
+and 2 gold entries, replaying the responses in `examples/recorded.json`. That prints the report at the top of this page.
+Those responses are a fixed demo set so the example runs free and offline, not a benchmark of any model.
+To see what your own judge model does, run it live with `--record` (below).
 
 The example judge is deliberately imperfect: it credits "adopted a new internal
 caching architecture" as a user-visible change (a decoy that dresses internal work

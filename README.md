@@ -2,39 +2,12 @@
 
 [![CI](https://github.com/dylanpulver/judge-check/actions/workflows/ci.yml/badge.svg)](https://github.com/dylanpulver/judge-check/actions/workflows/ci.yml)
 
-**Is your LLM judge actually discriminating, or just nodding?**
+**Is your LLM judge discriminating, or just nodding?**
 
-Decoys are the unit tests of judges. If you use an LLM to grade outputs — pass/fail
-gates in a pipeline, 1–10 scores in an eval harness — you have a measurement
-instrument, and an uncalibrated instrument is worse than none: it returns numbers
-that look like signal. The only cheap, direct test is to plant candidates that are
-*known* to deserve failure and see whether the judge fails them. A judge that never
-fails a decoy is measuring nothing; its "pass" on your real candidates is the same
-nod it gives everything. judge-check runs your judge over your real candidates plus
-three tiers of planted controls — obvious garbage, subtle-flaw decoys, and known-good
-gold — and reports whether the judge separates them, with an honest one-line verdict.
-
-Zero npm dependencies. Node 18+. Anthropic API via `fetch` (no SDK), or fully
-offline with a recorded responses file.
-
-## Quickstart (offline — no API key)
-
-```sh
-git clone <this repo> && cd judge-check
-npm run example
-# equivalently:
-node bin/judge-check.js \
-  --judge examples/changelog-judge.md \
-  --real examples/real.jsonl \
-  --decoys examples/decoys.jsonl \
-  --gold examples/gold.jsonl \
-  --garbage 3 \
-  --dry-run examples/recorded.json
-```
-
-The shipped example is a small judge ("does this changelog entry state a concrete,
-user-visible change?") run over 8 real entries, 3 garbage decoys, 4 subtle decoys,
-and 2 gold entries, replaying recorded responses. Output, verbatim:
+If you use an LLM to grade outputs, plant candidates that are known to deserve failure and see
+whether it fails them. judge-check runs your judge over your real candidates plus three tiers of
+planted controls (obvious garbage, subtle-flaw decoys, known-good gold) and tells you whether it
+separates them. The shipped example is a changelog judge that lets a dressed-up decoy through. Run offline from recorded responses, it prints:
 
 ```
 judge-check — calibration report
@@ -57,6 +30,27 @@ judge-check — calibration report
 
   VERDICT: your judge leaks — 25% of subtle-decoy judgments pass. Tighten the rubric against those failure modes.
 ```
+
+Zero npm dependencies. Node 18+. Anthropic API via `fetch` (no SDK), or fully offline with a recorded responses file.
+
+## Quickstart (offline, no API key)
+
+```sh
+git clone https://github.com/dylanpulver/judge-check && cd judge-check
+npm run example
+# equivalently:
+node bin/judge-check.js \
+  --judge examples/changelog-judge.md \
+  --real examples/real.jsonl \
+  --decoys examples/decoys.jsonl \
+  --gold examples/gold.jsonl \
+  --garbage 3 \
+  --dry-run examples/recorded.json
+```
+
+The shipped example is a small judge ("does this changelog entry state a concrete,
+user-visible change?") run over 8 real entries, 3 garbage decoys, 4 subtle decoys,
+and 2 gold entries, replaying recorded responses. That prints the report at the top of this page.
 
 The example judge is deliberately imperfect: it credits "adopted a new internal
 caching architecture" as a user-visible change (a decoy that dresses internal work
